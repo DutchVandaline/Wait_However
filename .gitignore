@@ -139,4 +139,5 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 
-lib/Constants.dart
+lib/API_KEY.dart
+lib/replacements.txt
