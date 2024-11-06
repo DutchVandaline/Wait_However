@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Screens/HomeScreen.dart';
+import 'package:provider/provider.dart';
+import 'package:waithowever/Screens/MainScreen.dart';
+import 'package:waithowever/Services/ArchiveNotifier.dart';
 import 'Theme/DarkTheme.dart';
 import 'Theme/LightTheme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => ArchiveNotifier()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -16,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -24,10 +27,9 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: LightTheme().theme,
-      darkTheme: DarkTheme().theme,
-      home: const HomeScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        theme: LightTheme().theme,
+        darkTheme: DarkTheme().theme,
+        home: const MainScreen());
   }
 }
