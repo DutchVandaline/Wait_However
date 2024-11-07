@@ -60,7 +60,7 @@ class TendencyWidget extends StatelessWidget {
               Flexible(
                 child: Column(
                   children: [
-                    Icon(_getPolicyIcon(policyValue)[0], size: 40),
+                    Icon(_getPolicyIcon(policyValue)[0], size: 30),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
@@ -78,7 +78,7 @@ class TendencyWidget extends StatelessWidget {
                     Icon(
                       _getAgitationIcon(agitationValue)[0],
                       color: _getAgitationIcon(agitationValue)[1],
-                      size: 40,
+                      size: 30,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),

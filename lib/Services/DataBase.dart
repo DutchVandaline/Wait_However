@@ -50,6 +50,29 @@ class DBHelper {
     });
   }
 
+  Future<List<Article>> findArticlesByKeyword(String keyword) async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query(
+      'articles',
+      where: 'keyword LIKE ?',
+      whereArgs: ['%$keyword%'],
+    );
+
+    return List.generate(maps.length, (i) {
+      return Article(
+        id: maps[i]['id'],
+        original_article: maps[i]['original_article'],
+        keyword: maps[i]['keyword'],
+        tendency: maps[i]['tendency'],
+        facts: maps[i]['facts'],
+        perspective: maps[i]['perspective'],
+        changedDate: maps[i]['changedDate'],
+      );
+    });
+  }
+
+
   Future<List<Article>> findArticle(String id) async {
     final db = await database;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:waithowever/Screens/ArticleSearchScreen.dart';
 import 'package:waithowever/Services/ArchiveNotifier.dart';
 import 'package:waithowever/Widget/ArchiveTileWidget.dart';
 
@@ -19,6 +20,19 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         scrolledUnderElevation: 0.0,
         centerTitle: false,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ArticleSearchScreen()));
+              },
+              icon: const Icon(
+                Icons.search,
+                size: 25.0,
+              ))
+        ],
         title: RichText(
           textAlign: TextAlign.start,
           text: TextSpan(
@@ -51,8 +65,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                           child: const Text(
                             '📄 아카이브 된 기사가 없습니다.',
                             style: TextStyle(
-                              fontSize: 20.0,
-                            ),
+                                fontSize: 20.0, fontFamily: "IBMPlexSansKR"),
                             textAlign: TextAlign.center,
                           ),
                         )

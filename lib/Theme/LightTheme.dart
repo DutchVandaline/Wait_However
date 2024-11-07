@@ -9,7 +9,7 @@ class LightTheme {
       primaryColorLight: Color(0xFF202023),
       hoverColor: Color(0xFFf5f6f6),
       primaryColorDark: Color(0xFFfffff6),
-      cardColor: Colors.white,
+      cardColor: Color(0xFFF5F5F0),
       disabledColor: Color(0xFF3A6EA5)
 
   );

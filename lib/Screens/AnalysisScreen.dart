@@ -86,20 +86,28 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isScrapped = !isScrapped;
-                    isScrapped ? saveArticle(context) : Provider.of<ArchiveNotifier>(context, listen: false).deleteArticle(nowId);
-                  });
-                },
-                icon: Icon(
-                  isScrapped ? Icons.bookmark_remove : Icons.bookmark_border_outlined,
-                  size: 30.0,
-                )),
-          )
+          _isLoading
+              ? const SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isScrapped = !isScrapped;
+                          isScrapped
+                              ? saveArticle(context)
+                              : Provider.of<ArchiveNotifier>(context,
+                                      listen: false)
+                                  .deleteArticle(nowId);
+                        });
+                      },
+                      icon: Icon(
+                        isScrapped
+                            ? Icons.bookmark_remove
+                            : Icons.bookmark_border_outlined,
+                        size: 30.0,
+                      )),
+                )
         ],
       ),
       body: SafeArea(
@@ -122,6 +130,30 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                     FactsWidget(content: _categorizedResults["facts"] ?? ""),
                     PerspectiveWidget(
                         content: _categorizedResults["perspective"] ?? ""),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).canvasColor,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Center(
+                              child: Text(
+                            "뒤로 가기",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontFamily: "IBMPlexSansKR"),
+                          )),
+                        ),
+                      ),
+                    )
                   ],
                 ),
         ),

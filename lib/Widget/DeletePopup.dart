@@ -13,10 +13,10 @@ class DeletePopUp extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: const Text("삭제 확인",
+      title: const Text("스크랩 취소",
           style: TextStyle(
               fontFamily: "IBMPlexSansKR")),
-      content: const Text("정말로 삭제하시겠습니까?\n삭제 이후에는 복구할 수 없습니다.",
+      content: const Text("해당 기사 스크랩을 삭제하시겠습니까?\n삭제 이후에는 복구할 수 없습니다.",
           style: TextStyle(fontFamily: "IBMPlexSansKR", fontSize: 19.0)),
       actions: [
         Padding(

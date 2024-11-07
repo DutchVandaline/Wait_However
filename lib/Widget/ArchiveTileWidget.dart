@@ -17,7 +17,7 @@ class _ArchiveTileWidgetState extends State<ArchiveTileWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -38,13 +38,16 @@ class _ArchiveTileWidgetState extends State<ArchiveTileWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  DateFormat("yyyy/MM/dd")
-                      .format(DateTime.parse(widget.articleItem.changedDate)),
-                  style: const TextStyle(
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20.0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    DateFormat("yyyy/MM/dd")
+                        .format(DateTime.parse(widget.articleItem.changedDate)),
+                    style: const TextStyle(
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20.0),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 3.0),
