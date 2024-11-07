@@ -12,6 +12,7 @@ class ArchiveNotifier extends ChangeNotifier {
   Future deleteArticle(String id) {
     _articles.removeWhere((element) => element.id == id);
     notifyListeners();
+    print("Article Deleted!");
     return DBHelper().deleteArticle(id);
   }
 

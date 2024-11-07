@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waithowever/Widget/buildCard.dart';
+import 'package:waithowever/Widget/AnalysisCardWidget.dart';
 
 class FactsWidget extends StatelessWidget {
   final String content;
@@ -8,6 +8,6 @@ class FactsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildCard("Facts", content);
+    return AnalysisCardWidget(title: "Facts", content: content);
   }
 }

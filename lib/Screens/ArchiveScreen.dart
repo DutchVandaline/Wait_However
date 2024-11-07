@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waithowever/Services/ArchiveNotifier.dart';
-import 'package:waithowever/Widget/ArticleTile.dart';
+import 'package:waithowever/Widget/ArchiveTileWidget.dart';
 
 class ArchiveScreen extends StatefulWidget {
   const ArchiveScreen({super.key});
@@ -48,14 +48,11 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   return articleData.articles.isEmpty
                       ? Container(
                           alignment: Alignment.center,
-                          child: Text(
-                            '할일이 없습니다',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.normal),
+                          child: const Text(
+                            '📄 아카이브 된 기사가 없습니다.',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -65,7 +62,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                           itemBuilder: (context, index) {
                             final i = index;
                             final articleItem = articleData.articles[i];
-                            return ArticleTile(articleItem: articleItem);
+                            return ArchiveTileWidget(articleItem: articleItem);
                           });
                 },
               ),

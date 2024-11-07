@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waithowever/Widget/buildCard.dart';
+import 'package:waithowever/Widget/AnalysisCardWidget.dart';
 
 
 class PerspectiveWidget extends StatelessWidget {
@@ -9,6 +9,6 @@ class PerspectiveWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildCard("Perspective", content);
+    return AnalysisCardWidget(title: "Perspective", content: content);
   }
 }

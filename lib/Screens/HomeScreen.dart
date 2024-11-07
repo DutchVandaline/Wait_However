@@ -15,6 +15,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final articleController = TextEditingController();
 
   @override
+  void initState() {
+    input_text = "";
+    article = "";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -93,8 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent)),
                       hintText: "분석하고자 하는 게시글을 입력하세요.",
+                      hintStyle: const TextStyle(fontFamily: "IBMPlexSansKR"),
                     ),
                     cursorColor: Theme.of(context).focusColor,
+                    style: const TextStyle(fontFamily: "IBMPlexSansKR"),
                   ),
                 ),
               ),
@@ -120,8 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: const Center(
                         child: Text(
-                      "게시글의 성향 분석하기",
-                      style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      "게시글 성향 분석하기",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontFamily: "IBMPlexSansKR"),
                     )),
                   ),
                 ),

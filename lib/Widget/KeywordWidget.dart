@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class KeywordWidget extends StatelessWidget {
   final String keywords;
+  final bool showTitle;
 
-  const KeywordWidget({Key? key, required this.keywords}) : super(key: key);
+  const KeywordWidget({Key? key, required this.keywords, required this.showTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +16,15 @@ class KeywordWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          showTitle ? Text(
             "Keywords",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
               color: Theme.of(context).primaryColorLight,
             ),
-          ),
-          const SizedBox(height: 8),
+          ) : const SizedBox(),
+          showTitle ? const SizedBox(height: 8) : const SizedBox(),
           SizedBox(
             height: 40.0,
             child: ListView(

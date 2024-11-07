@@ -10,6 +10,8 @@ import 'package:waithowever/Widget/KeywordWidget.dart';
 import 'package:waithowever/Widget/PrespectiveWidget.dart';
 import 'package:waithowever/Widget/TendencyWidget.dart';
 
+String nowId = "";
+
 class AnalysisScreen extends StatefulWidget {
   final String inputArticle;
 
@@ -53,6 +55,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   @override
   void initState() {
     _analyzeArticle();
+    nowId = "";
     super.initState();
   }
 
@@ -88,10 +91,14 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             child: IconButton(
                 onPressed: () {
                   setState(() {
-                    isScrapped != isScrapped;
-                    saveArticle(context);
+                    isScrapped = !isScrapped;
+                    isScrapped ? saveArticle(context) : Provider.of<ArchiveNotifier>(context, listen: false).deleteArticle(nowId);
                   });
-                }, icon: Icon(isScrapped ? Icons.label_off_rounded : Icons.label, size: 30.0,)),
+                },
+                icon: Icon(
+                  isScrapped ? Icons.bookmark_remove : Icons.bookmark_border_outlined,
+                  size: 30.0,
+                )),
           )
         ],
       ),
@@ -107,29 +114,39 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
               : ListView(
                   children: [
                     KeywordWidget(
-                        keywords: _categorizedResults["keyword"] ?? ""),
-                    TendencyWidget(content: _categorizedResults["tendency"] ?? ""),
+                      keywords: _categorizedResults["keyword"] ?? "",
+                      showTitle: true,
+                    ),
+                    TendencyWidget(
+                        content: _categorizedResults["tendency"] ?? ""),
                     FactsWidget(content: _categorizedResults["facts"] ?? ""),
-                    PerspectiveWidget(content: _categorizedResults["perspective"] ?? ""),
+                    PerspectiveWidget(
+                        content: _categorizedResults["perspective"] ?? ""),
                   ],
                 ),
         ),
       ),
     );
   }
+
   void saveArticle(BuildContext context) {
     DateTime now = DateTime.now();
     String id = memosha512(now.toString());
     String changedDate = DateFormat('yyyyMMdd').format(now);
+    nowId = id;
     Provider.of<ArchiveNotifier>(context, listen: false).addArticle(
       id,
-      widget.inputArticle, //original_Article
-      _categorizedResults["keyword"] ?? "", //keyword
-      _categorizedResults["tendency"] ?? "", //tendency
-      _categorizedResults["facts"] ?? "", //facts,
-      _categorizedResults["perspective"] ?? "", //perspective
+      widget.inputArticle,
+      //original_Article
+      _categorizedResults["keyword"] ?? "",
+      //keyword
+      _categorizedResults["tendency"] ?? "",
+      //tendency
+      _categorizedResults["facts"] ?? "",
+      //facts,
+      _categorizedResults["perspective"] ?? "",
+      //perspective
       changedDate,
-
     );
   }
 
