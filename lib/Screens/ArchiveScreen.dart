@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waithowever/Screens/ArticleSearchScreen.dart';
 import 'package:waithowever/Services/ArchiveNotifier.dart';
+import 'package:waithowever/Services/DataBase.dart';
+import 'package:waithowever/Services/generateSharePDF.dart';
 import 'package:waithowever/Widget/ArchiveTileWidget.dart';
 
 class ArchiveScreen extends StatefulWidget {
@@ -12,6 +14,13 @@ class ArchiveScreen extends StatefulWidget {
 }
 
 class _ArchiveScreenState extends State<ArchiveScreen> {
+  final DBHelper dbHelper = DBHelper();
+
+  Future<void> onPressedGeneratePdf() async {
+    List<Article> articles = await dbHelper.getArticles(10);
+    generateAndSharePdf(articles);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +31,12 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
+              onPressed:onPressedGeneratePdf,
+              icon: const Icon(
+                Icons.picture_as_pdf,
+                size: 25.0,
+              )),
+          IconButton(
               onPressed: () {
                 Navigator.push(
                     context,
@@ -31,7 +46,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
               icon: const Icon(
                 Icons.search,
                 size: 25.0,
-              ))
+              )),
         ],
         title: RichText(
           textAlign: TextAlign.start,

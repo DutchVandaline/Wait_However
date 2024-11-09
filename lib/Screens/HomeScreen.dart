@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontSize: 35.0, fontWeight: FontWeight.w800)),
                           TextSpan(
                               text:
-                                  'a helpful assisant\nthat keeps you\nbalanced.'),
+                                  'a helpful assisant\nto keep you\nbalanced.'),
                         ],
                       ),
                     ),

@@ -4,6 +4,7 @@ import 'package:waithowever/Services/DataBase.dart';
 import 'package:waithowever/Widget/DeletePopup.dart';
 import 'package:waithowever/Widget/DetailWidget.dart';
 import 'package:waithowever/Widget/KeywordWidget.dart';
+import 'package:waithowever/Widget/TendencyWidget.dart';
 
 class ArchiveDetailScreen extends StatefulWidget {
   const ArchiveDetailScreen({super.key, required this.articleItem});
@@ -44,6 +45,7 @@ class _ArchiveDetailScreenState extends State<ArchiveDetailScreen> {
       ),
       body: ListView(
         children: [
+          TendencyWidget(content: widget.articleItem.tendency),
           DetailWidget(
               inputTitle: "Original Article",
               inputItem: widget.articleItem.original_article),

@@ -31,6 +31,12 @@ class DBHelper {
     print("insert article $article");
   }
 
+  Future<int> countArticles() async {
+    final Database db = await database;
+    final result = await db.rawQuery("SELECT COUNT(*) FROM articles");
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
+
   Future<List<Article>> getArticles(int numb) async {
     final Database db = await database;
 

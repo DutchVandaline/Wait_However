@@ -1,44 +1,55 @@
 import 'package:flutter/material.dart';
 
+int policyValue = 0;
+
 class TendencyWidget extends StatelessWidget {
   final String content;
 
   const TendencyWidget({Key? key, required this.content}) : super(key: key);
 
-  Map<String, int> _extractValues(String text) {
-    final regExp = RegExp(r'(\w+):\s*(-?\d+)');
-    Map<String, int> values = {};
-
-    for (var match in regExp.allMatches(text)) {
-      final tag = match.group(1)!;
-      final value = int.parse(match.group(2)!);
-      values[tag] = value;
+  void _extractPolicyValue(String text) {
+    final regExp = RegExp(r'policy:\s*.*?\((\-?\d+)\)');
+    final match = regExp.firstMatch(text);
+    if (match != null) {
+      print("Match found: ${match.group(1)}");
+      policyValue = int.parse(match.group(1)!);
+    } else {
+      print("No match found for policy value.");
+      policyValue = 0;
     }
-
-    return values;
   }
 
-  List _getPolicyIcon(int value) {
-    if (value == 0) return [Icons.shield, "보수적"];
-    if (value == 1) return [Icons.balance, "중도"];
-    if (value == 2) return [Icons.handyman, "진보적"];
+  int _extractAgitationValue(String text) {
+    final regExp = RegExp(r'agitation:\s*(?:\w*\()?(\-?\d+)\)?');
+    final match = regExp.firstMatch(text);
+    if (match != null) {
+      return int.parse(match.group(1)!);
+    }
+    return 0; // Default value if no agitation value is found
+  }
+
+  List _getPolicyIcon(int policyValue) {
+    if (policyValue == 0) return [Icons.shield, "보수적"];
+    if (policyValue == 1) return [Icons.balance, "중도"];
+    if (policyValue == 2) return [Icons.handyman, "진보적"];
     return [Icons.warning_amber, "문제가 발생했습니다."];
   }
 
-  List _getAgitationIcon(int value) {
-    if (value == 5) return [Icons.flag_rounded, Colors.teal, "낮은 선동성"];
-    if (value == 6) return [Icons.flag_rounded, Colors.indigo, "약한 선동성"];
-    if (value == 7) return [Icons.flag_sharp, Colors.orange, "보통 선동성"];
-    if (value == 8) return [Icons.flag_rounded, Colors.red, "다분히 선동적"];
-    if (value == 9) return [Icons.warning, Colors.red, "심히 선동적"];
+  List _getAgitationIcon(int agitationValue) {
+    if (agitationValue == 5) return [Icons.flag_rounded, Colors.teal, "낮은 선동성"];
+    if (agitationValue == 6) return [Icons.flag_rounded, Colors.indigo, "약한 선동성"];
+    if (agitationValue == 7) return [Icons.flag_sharp, Colors.orange, "보통 선동성"];
+    if (agitationValue == 8) return [Icons.flag_rounded, Colors.red, "다분히 선동적"];
+    if (agitationValue == 9) return [Icons.warning, Colors.red, "심히 선동적"];
     return [Icons.help_outline, Colors.black, "문제가 발생했습니다."];
   }
 
   @override
   Widget build(BuildContext context) {
-    final values = _extractValues(content);
-    final policyValue = values['policy'] ?? 0;
-    final agitationValue = values['agitation'] ?? 0;
+    _extractPolicyValue(content);
+    print(content);
+    print(policyValue);
+    final agitationValue = _extractAgitationValue(content);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
