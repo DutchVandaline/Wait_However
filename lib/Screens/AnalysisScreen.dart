@@ -135,7 +135,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const HomeScreen_URLONLY()), (route) => false);
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen_URLONLY()), (route) => false);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,

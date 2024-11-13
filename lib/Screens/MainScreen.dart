@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waithowever/Screens/ArchiveScreen.dart';
 import 'package:waithowever/Screens/HomeScreen.dart';
 import 'package:waithowever/Screens/HomeScreen_URLONLY.dart';
-import 'package:waithowever/Screens/SharedUrlScreen.dart';
+import 'package:waithowever/Screens/HomeScreen_URLONLY.dart';
 
 class MainScreen extends StatefulWidget {
   final int initialIndex;
@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     //const HomeScreen(),
     //HomeScreen_URLONLY(),
-    SharedUrlScreen(),
+    HomeScreen_URLONLY(),
     const ArchiveScreen(),
   ];
 
