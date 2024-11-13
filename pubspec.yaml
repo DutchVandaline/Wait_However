@@ -45,6 +45,10 @@ dependencies:
   printing: ^5.12.0
   path_provider: ^2.0.11
   share: ^2.0.4
+  http: ^1.2.0
+  html: ^0.15.0
+  process_run: ^1.0.1
+  receive_sharing_intent: ^1.8.1
 
 dev_dependencies:
   flutter_test:
