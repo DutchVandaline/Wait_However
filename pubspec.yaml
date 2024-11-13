@@ -48,7 +48,7 @@ dependencies:
   http: ^1.2.0
   html: ^0.15.0
   process_run: ^1.0.1
-  receive_sharing_intent: ^1.8.1
+  receive_sharing_intent: ^1.5.4
 
 dev_dependencies:
   flutter_test:
