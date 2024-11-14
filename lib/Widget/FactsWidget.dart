@@ -8,6 +8,8 @@ class FactsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnalysisCardWidget(title: "Facts", content: content);
+    String filteredContent = content.replaceAll('zai_facts', '');
+
+    return AnalysisCardWidget(title: "Facts", content: filteredContent);
   }
 }

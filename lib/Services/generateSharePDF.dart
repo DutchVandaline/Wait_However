@@ -9,35 +9,54 @@ Future<void> generateAndSharePdf(List<Article> articles) async {
   final pdf = pw.Document();
   final fontData = await rootBundle.load("assets/fonts/IBMPlexSansKR-Regular.ttf");
   final ttf = pw.Font.ttf(fontData);
+  const maxArticlesPerPdf = 1000;
 
-  pdf.addPage(
-    pw.MultiPage(
-      build: (pw.Context context) => [
-        pw.Column(
-          children: articles.map((article) {
-            return pw.Container(
-              margin: const pw.EdgeInsets.only(bottom: 20),
-              child: pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text("Original Article: ${article.original_article}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Text("Keyword: ${article.keyword}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Text("Tendency: ${article.tendency}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Text("Facts: ${article.facts}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Text("Perspective: ${article.perspective}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Text("Changed Date: ${article.changedDate}\n", style: pw.TextStyle(font: ttf)),
-                  pw.Divider(),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-      ],
-    ),
-  );
+  int currentPageArticleCount = 0;
+  List<pw.Document> pdfDocuments = [];
+  pw.Document currentPdf = pw.Document();
 
-  final output = await getApplicationDocumentsDirectory();
-  final file = File("${output.path}/WaitHowever.pdf");
-  await file.writeAsBytes(await pdf.save());
-  Share.shareFiles([file.path]);
+  for (var article in articles) {
+    if (currentPageArticleCount >= maxArticlesPerPdf) {
+      pdfDocuments.add(currentPdf);
+      currentPdf = pw.Document(); // Create a new document
+      currentPageArticleCount = 0; // Reset counter
+    }
+
+    currentPdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text("Original Article: ${article.original_article}", style: pw.TextStyle(font: ttf)),
+              pw.Text("Keyword: ${article.keyword}", style: pw.TextStyle(font: ttf)),
+              pw.Text("Tendency: ${article.tendency}", style: pw.TextStyle(font: ttf)),
+              pw.Text("Facts: ${article.facts}", style: pw.TextStyle(font: ttf)),
+              pw.Text("Perspective: ${article.perspective}", style: pw.TextStyle(font: ttf)),
+              pw.Text("Changed Date: ${article.changedDate}", style: pw.TextStyle(font: ttf)),
+              pw.Divider(),
+            ],
+          );
+        },
+      ),
+    );
+
+    currentPageArticleCount++;
+  }
+
+  if (currentPageArticleCount > 0) {
+    pdfDocuments.add(currentPdf);
+  }
+
+  // Save or share each document
+  try {
+    final output = await getApplicationDocumentsDirectory();
+    for (var i = 0; i < pdfDocuments.length; i++) {
+      final file = File("${output.path}/WaitHowever_${i + 1}.pdf");
+      await file.writeAsBytes(await pdfDocuments[i].save());
+      Share.shareFiles([file.path]);
+    }
+  } catch (e) {
+    print("Error generating PDF: $e");
+  }
 }

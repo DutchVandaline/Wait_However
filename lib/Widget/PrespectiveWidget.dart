@@ -9,6 +9,8 @@ class PerspectiveWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnalysisCardWidget(title: "Perspective", content: content);
+    String filteredContent = content.replaceAll('zai_perspective', '');
+
+    return AnalysisCardWidget(title: "Perspective", content: filteredContent);
   }
 }

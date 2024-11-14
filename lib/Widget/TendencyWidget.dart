@@ -12,10 +12,8 @@ class TendencyWidget extends StatelessWidget {
     final regExp = RegExp(r'중도\((\d+)\)');
     final match = regExp.firstMatch(text);
     if (match != null) {
-      print("Match found for policy: ${match.group(1)}");
       policyValue = int.parse(match.group(1)!);
     } else {
-      print("No match found for policy value.");
       policyValue = 0;
     }
   }
@@ -24,7 +22,6 @@ class TendencyWidget extends StatelessWidget {
     final regExp = RegExp(r'agitation:\s*(\d+)');
     final match = regExp.firstMatch(text);
     if (match != null) {
-      print("Match found for agitation: ${match.group(1)}");
       return int.parse(match.group(1)!);
     }
     return 0;
@@ -48,20 +45,22 @@ class TendencyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _extractPolicyValue(content);
-    final agitationValue = _extractAgitationValue(content);
+    String filteredContent = content.replaceAll('zai_tendency', '');
+
+    _extractPolicyValue(filteredContent);
+    final agitationValue = _extractAgitationValue(filteredContent);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Tendency",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: Colors.black,
+              fontSize: 30,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
           const SizedBox(height: 16),

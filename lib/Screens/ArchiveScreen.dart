@@ -31,7 +31,7 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed:onPressedGeneratePdf,
+              onPressed: onPressedGeneratePdf,
               icon: const Icon(
                 Icons.picture_as_pdf,
                 size: 25.0,
@@ -77,10 +77,12 @@ class _ArchiveScreenState extends State<ArchiveScreen> {
                   return articleData.articles.isEmpty
                       ? Container(
                           alignment: Alignment.center,
-                          child: const Text(
+                          child: Text(
                             '📄 아카이브 된 기사가 없습니다.',
                             style: TextStyle(
-                                fontSize: 20.0, fontFamily: "IBMPlexSansKR"),
+                                fontSize: 20.0,
+                                fontFamily: "IBMPlexSansKR",
+                                color: Theme.of(context).primaryColorLight),
                             textAlign: TextAlign.center,
                           ),
                         )
