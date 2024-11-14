@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:waithowever/Screens/AnalysisScreen.dart';
+import 'package:waithowever/Screens/AddArticleManualScreen.dart';
+import 'package:waithowever/Screens/MainScreen.dart';
 
 class ArticleSelectScreen extends StatefulWidget {
   const ArticleSelectScreen({super.key, required this.articleContent});
+
   final String articleContent;
 
   @override
@@ -16,7 +19,12 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
   @override
   void initState() {
     super.initState();
-    _paragraphs = widget.articleContent.split('\n').where((p) => p.trim().isNotEmpty).toList();
+    _paragraphs = widget.articleContent
+        .split('\n')
+        .where((p) => p.trim().isNotEmpty)
+        .toList();
+    _selectedIndices =
+        List<int>.generate(_paragraphs.length, (index) => index); // 모든 문단 초기 선택
   }
 
   void toggleParagraphSelection(int index) {
@@ -38,11 +46,11 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
       if (_selectedIndices.length == _paragraphs.length) {
         _selectedIndices.clear();
       } else {
-        _selectedIndices = List<int>.generate(_paragraphs.length, (index) => index); // 모두 선택
+        _selectedIndices =
+            List<int>.generate(_paragraphs.length, (index) => index); // 모두 선택
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +66,16 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
         ),
         actions: [
           IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AddArticleManualScreen()));
+            },
+            icon: const Icon(Icons.question_mark),
+          ),
+          IconButton(
             icon: Icon(
-              _selectedIndices.length == _paragraphs.length ? Icons.deselect : Icons.select_all,
+              _selectedIndices.length == _paragraphs.length
+                  ? Icons.deselect
+                  : Icons.select_all,
               color: Colors.blueAccent,
             ),
             onPressed: selectAllParagraphs,
@@ -95,7 +111,8 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
                         ),
                         child: Text(
                           _paragraphs[index],
-                          style: const TextStyle(fontSize: 16.0, fontFamily: "IBMPlexSansKR"),
+                          style: const TextStyle(
+                              fontSize: 16.0, fontFamily: "IBMPlexSansKR"),
                         ),
                       ),
                     );
@@ -105,14 +122,15 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     String selectedText = (_selectedIndices..sort())
                         .map((index) => _paragraphs[index])
                         .join('\n\n');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AnalysisScreen(inputArticle: selectedText),
+                        builder: (context) =>
+                            AnalysisScreen(inputArticle: selectedText),
                       ),
                     );
                   },
@@ -142,4 +160,3 @@ class _ArticleSelectScreenState extends State<ArticleSelectScreen> {
     );
   }
 }
-

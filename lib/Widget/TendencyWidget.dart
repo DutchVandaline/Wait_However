@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 int policyValue = 0;
+int agitation = 0;
 
 class TendencyWidget extends StatelessWidget {
   final String content;
@@ -8,10 +9,10 @@ class TendencyWidget extends StatelessWidget {
   const TendencyWidget({Key? key, required this.content}) : super(key: key);
 
   void _extractPolicyValue(String text) {
-    final regExp = RegExp(r'policy:\s*.*?\((\-?\d+)\)');
+    final regExp = RegExp(r'중도\((\d+)\)');
     final match = regExp.firstMatch(text);
     if (match != null) {
-      print("Match found: ${match.group(1)}");
+      print("Match found for policy: ${match.group(1)}");
       policyValue = int.parse(match.group(1)!);
     } else {
       print("No match found for policy value.");
@@ -20,12 +21,13 @@ class TendencyWidget extends StatelessWidget {
   }
 
   int _extractAgitationValue(String text) {
-    final regExp = RegExp(r'agitation:\s*(?:\w*\()?(\-?\d+)\)?');
+    final regExp = RegExp(r'agitation:\s*(\d+)');
     final match = regExp.firstMatch(text);
     if (match != null) {
+      print("Match found for agitation: ${match.group(1)}");
       return int.parse(match.group(1)!);
     }
-    return 0; // Default value if no agitation value is found
+    return 0;
   }
 
   List _getPolicyIcon(int policyValue) {
@@ -47,8 +49,6 @@ class TendencyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _extractPolicyValue(content);
-    print(content);
-    print(policyValue);
     final agitationValue = _extractAgitationValue(content);
 
     return Padding(

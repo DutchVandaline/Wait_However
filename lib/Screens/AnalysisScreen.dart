@@ -3,7 +3,8 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:waithowever/Screens/HomeScreen_URLONLY.dart';
+import 'package:waithowever/Screens/HomeScreen.dart';
+import 'package:waithowever/Screens/MainScreen.dart';
 import 'package:waithowever/Services/ArchiveNotifier.dart';
 import 'package:waithowever/Services/ai_services.dart';
 import 'package:waithowever/Widget/FactsWidget.dart';
@@ -39,6 +40,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       setState(() {
         _categorizedResults = _analysisService.splitTextByCategory(result);
         _isLoading = false;
+        print(result);
       });
     } catch (error) {
       setState(() {
@@ -135,7 +137,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen_URLONLY()), (route) => false);
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainScreen()), (route) => false);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,

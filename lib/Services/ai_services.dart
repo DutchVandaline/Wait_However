@@ -24,8 +24,10 @@ class AnalysisService {
       Content.text("Article : $inputArticle"),
     ]);
 
-    return response.text!;
+    // Replace all asterisks with an empty string
+    return response.text!.replaceAll("*", "");
   }
+
 
   Map<String, String> splitTextByCategory(String text) {
     Map<String, String> categorizedText = {
@@ -39,13 +41,13 @@ class AnalysisService {
 
     for (var section in sections) {
       if (section.startsWith("zai_tendency")) {
-        categorizedText["tendency"] = section.replaceFirst("zai_tendency:", "").trim();
+        categorizedText["tendency"] = section.replaceAll("zai_tendency:", "").trim();
       } else if (section.startsWith("zai_keyword")) {
-        categorizedText["keyword"] = section.replaceFirst("zai_keyword:", "").trim();
+        categorizedText["keyword"] = section.replaceAll("zai_keyword:", "").trim();
       } else if (section.startsWith("zai_facts")) {
-        categorizedText["facts"] = section.replaceFirst("zai_facts:", "").trim();
+        categorizedText["facts"] = section.replaceAll("zai_facts:", "").trim();
       } else if (section.startsWith("zai_perspective")) {
-        categorizedText["perspective"] = section.replaceFirst("zai_perspective:", "").trim();
+        categorizedText["perspective"] = section.replaceAll("zai_perspective:", "").trim();
       }
     }
 
