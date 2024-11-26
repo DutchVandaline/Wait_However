@@ -13,14 +13,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/DutchVandaline/Wait_However">
-    <img src="https://github.com/user-attachments/assets/e6ec5b93-2b39-4dbd-bdf1-ef4aebff7382" alt="Logo" width="100" height="100">
+    <img src="https://github.com/user-attachments/assets/7c4e5e87-3ce8-4e3f-ad18-d8e4512859c4" alt="Logo" width="100" height="100">
   </a>
-
 
   <h3 align="center">Wait, However</h3>
 
   <p align="center">
-    This Repository is progressing.
+    *Wait, However* is an app that provides balanced perspective on News.
     <br />
     <a href=""> <!--앱스토어 url href="여기에" 부분에 추가-->
     <img src="https://img.shields.io/badge/AppStore-0D96F6?style=flat-square&logo=appstore&logoColor=white"
@@ -67,7 +66,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <!-- 이미지 삽입 ![Pequod](https://github.com/user-attachments/assets/8bf45ee3-1001-459a-8db2-f32632e20dfc)-->
-🍾 Wait_However is in development. It is updating due to the progess. Please chech the github tech blog I've uploaded on the bottom.
+🔭 “Propaganda can be achieved with just one sentence, but refutation requires an enormous amount of evidence.” This phrase, often attributed to Paul Joseph Goebbels, the Nazi Germany Minister of Propaganda and Enlightenment and a so-called "master of propaganda," ironically, was never actually spoken by him. This sentence itself serves as an excellent example of the dangers of propaganda and the importance of verifying sources. The public tends to trust statements attributed to individuals recognized as authorities in a particular field without questioning their authenticity. This tendency creates an environment where false information can easily spread.<br/>
+
+The rise of artificial intelligence technologies, such as fake news generation and deepfake videos, has made it even more challenging to distinguish truth from lies. In South Korea, the spread of fake news and the resulting social confusion have emerged as significant issues. Professor Han Kyuseop of Seoul National University, speaking at the EAI Fake News Conference, analyzed that in Korea, fake news often proliferates through a process where articles produced by officially registered media outlets are repeatedly cited by political circles or other media, amplifying their reach. In a competitive media environment, exaggerated information is frequently reproduced for attention, which significantly influences the public's acceptance of false information as truth.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -81,8 +82,9 @@
 -->
 
 ## Key Features
-📍 You can think in different ways.<br/>
-💡 Artificial Intelligence generates the text and show other perspective.<br/>
+📍 [Fact-checking and Diverse Perspective Offering] I've used Gemini to analyze the article.<br/>
+💡 [User-Friendly UI/UX Design] Simple and straightforward interface to facilitate exploration of diverse perspectives.<br/>
+🔧 [Fact Extractor] AI extarcts the fact and makes it easy to view.<br/>
 
 <!--
 <img src="https://github.com/user-attachments/assets/7f15a1f3-65ca-4ae7-912a-4b3ccd8533bd"  width="270" height="270"/>
@@ -92,7 +94,6 @@
 ### Built With
 
 * [![Flutter][Flutter]][Flutter-url]
-* [![Django][Django]][Django-url]
 * [![Gemini][Gemini]][Gemini-url]
 * [![AndroidStudio][AndroidStudio]][AndroidStudio-url]
 * [![Figma][Figma]][Figma-url]
